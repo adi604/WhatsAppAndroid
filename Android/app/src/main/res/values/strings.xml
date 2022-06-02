@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">WhatsApp</string>
+    <string name="login_UserName">Username</string>
+    <string name="login_Password">Password</string>
+    <string name="login_Login">Log in</string>
+    <string name="login_heading">Login</string>
+    <string name="login_not_register">Not Register?</string>
 </resources>
