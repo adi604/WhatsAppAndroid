@@ -59,17 +59,21 @@
             android:hint="@string/register_confirm_password"
             android:inputType="textPassword"
             android:padding="15dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-        <Button
-            android:id="@+id/btnUploadImage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:background="@drawable/profile_image"
-            android:text="@string/register_upload_image"
-            android:textSize="10sp"
-            tools:ignore="SmallSp"
-            android:backgroundTint="@color/black"/>
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/profile_image"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/register_upload_image"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
+        </RelativeLayout>
 
         <Button
             android:id="@+id/btnSignIn"
@@ -79,18 +83,17 @@
             android:background="#00684C4C"
             android:text="@string/register_already_member"
             android:textAlignment="center"
-            android:textStyle="bold"
+            android:textFontWeight="10"
             android:textColor="@color/black" />
 
         <Button
-        android:id="@+id/btnSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:text="@string/register_sign_up"
-        android:backgroundTint="@color/black"/>
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/register_sign_up" />
 
 
     </LinearLayout>

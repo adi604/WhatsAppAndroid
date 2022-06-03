@@ -53,14 +53,14 @@
             android:textColor="@color/black" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_marginTop="10dp"
             android:text="@string/login_Login"
-            app:backgroundTint="@color/black"/>
+            android:backgroundTint="@color/black"/>
     </LinearLayout>
 
     <TextView
