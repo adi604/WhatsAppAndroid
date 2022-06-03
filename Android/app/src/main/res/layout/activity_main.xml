@@ -59,7 +59,8 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_marginTop="10dp"
-            android:text="@string/login_Login" />
+            android:text="@string/login_Login"
+            app:backgroundTint="@color/black"/>
     </LinearLayout>
 
     <TextView
