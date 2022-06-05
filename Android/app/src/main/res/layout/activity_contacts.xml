@@ -12,16 +12,15 @@
         android:id="@+id/lstContacts"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="60dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:paddingTop="100dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="252dp" />
 
     <LinearLayout
         android:id="@+id/headingUserName"
         android:layout_width="412dp"
         android:layout_height="60dp"
         android:orientation="horizontal"
-        android:background="?attr/colorButtonNormal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/lstContacts">
@@ -48,6 +47,40 @@
 
     </LinearLayout>
 
+
+    <LinearLayout
+        android:layout_width="412dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headingUserName">
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingStart="5dp"
+            android:hint="Search.."
+            android:background="@null"
+            android:inputType="text"
+            tools:ignore="RtlSymmetry" />
+
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/btnSearch"-->
+<!--            android:layout_width="45dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:layout_marginEnd="10dp"-->
+<!--            app:backgroundTint="@color/white"-->
+<!--            app:fabCustomSize="50dp"-->
+<!--            app:srcCompat="@drawable/ic_menu_search"-->
+<!--            tools:ignore="MissingConstraints,RtlSymmetry" />-->
+
+
+    </LinearLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAdd"
         android:layout_width="45dp"
@@ -59,20 +92,6 @@
         app:layout_constraintEnd_toEndOf="@+id/headingUserName"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_menu_add"
-        tools:ignore="MissingConstraints,RtlSymmetry" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnSearch"
-        android:layout_width="45dp"
-        app:fabCustomSize="50dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="5dp"
-        app:backgroundTint="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/headingUserName"
-        app:layout_constraintEnd_toStartOf="@+id/btnAdd"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_menu_search"
         tools:ignore="MissingConstraints,RtlSymmetry" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

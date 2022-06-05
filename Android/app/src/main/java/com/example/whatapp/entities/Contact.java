@@ -20,8 +20,9 @@ public class Contact {
     private int id;
 
     private String userName;
+    private String lastMessageC;
     private int image;
-    private Calendar lastMessage;
+    private Calendar lastMessageT;
 
 
     public void setId(int id) {
@@ -36,6 +37,13 @@ public class Contact {
         this.image = image;
     }
 
+    public String getLastMessageC() {
+        return lastMessageC;
+    }
+
+    public void setLastMessageC(String lastMessageC) {
+        this.lastMessageC = lastMessageC;
+    }
 
 
     public int getId() {
@@ -54,21 +62,22 @@ public class Contact {
         image = R.drawable.background;
     }
 
-    public void setLastMessage(Calendar lastMessage) {
-        this.lastMessage = lastMessage;
+    public void setLastMessageT(Calendar lastMessage) {
+        this.lastMessageT = lastMessage;
     }
 
-    public String getLastMessage() {
+    public String getLastMessageT() {
         Formatter fmt = new Formatter();
-        fmt.format("%tl:%tM", lastMessage, lastMessage);
+        fmt.format("%tl:%tM", lastMessageT, lastMessageT);
         return fmt.toString();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public Contact(String user, int img) {
+    public Contact(String user,String message,  int img) {
         userName = user;
         image = img;
-        lastMessage = Calendar.getInstance();
+        lastMessageT = Calendar.getInstance();
+        lastMessageC = message;
 
     }
 }

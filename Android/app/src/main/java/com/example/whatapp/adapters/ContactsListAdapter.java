@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.whatapp.R;
 import com.example.whatapp.entities.Contact;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -20,14 +21,16 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
 
     class ContactViewHolder extends RecyclerView.ViewHolder {
         private final TextView tvUserName;
-        private final TextView tvLMessage;
+        private final TextView tvLMessageT;
+        private final TextView tvLMessageC;
         private final CircleImageView ivImage;
 
         private ContactViewHolder(View itemView) {
             super(itemView);
             tvUserName = itemView.findViewById(R.id.tvUserName);
             ivImage = itemView.findViewById(R.id.ivImage);
-            tvLMessage = itemView.findViewById(R.id.tvLMessage);
+            tvLMessageT = itemView.findViewById(R.id.tvLMessageT);
+            tvLMessageC = itemView.findViewById(R.id.tvLMessageC);
         }
     }
 
@@ -48,7 +51,8 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
             final Contact current = contacts.get(position);
             holder.tvUserName.setText(current.getUserName());
             holder.ivImage.setImageResource(current.getImage());
-            holder.tvLMessage.setText(current.getLastMessage());
+            holder.tvLMessageT.setText(current.getLastMessageT());
+            holder.tvLMessageC.setText(current.getLastMessageC());
         }
     }
 
@@ -68,4 +72,5 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
     public List<Contact> getContacts() {
         return contacts;
     }
+
 }
