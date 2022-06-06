@@ -3,6 +3,7 @@ package com.example.whatapp.entities;
 import androidx.room.PrimaryKey;
 
 import java.util.Calendar;
+import java.util.Formatter;
 
 public class Message {
 
@@ -25,8 +26,10 @@ public class Message {
         return content;
     }
 
-    public Calendar getTime() {
-        return time;
+    public String getTime() {
+        Formatter fmt = new Formatter();
+        fmt.format("%tl:%tM", time, time);
+        return fmt.toString();
     }
 
     public void setSent(boolean sent) {
