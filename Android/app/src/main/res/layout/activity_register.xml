@@ -60,13 +60,14 @@
             android:inputType="textPassword"
             android:padding="15dp" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnUploadImage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_gravity="center"
             android:background="@drawable/circle"
             android:text="@string/register_upload_image"
+            android:textColor="@color/white"
             android:textSize="10sp"
             tools:ignore="SmallSp"/>
 

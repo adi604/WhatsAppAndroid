@@ -12,4 +12,6 @@
     <string name="register_already_member">I\'m already member</string>
     <string name="register_upload_image">Upload image</string>
     <string name="regitser_create_new_account">Create New Account</string>
+    <string name="chat_enter_message">Enter Message</string>
+    <string name="chat_send">Send</string>
 </resources>

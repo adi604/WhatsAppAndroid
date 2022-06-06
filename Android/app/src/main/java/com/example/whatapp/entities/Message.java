@@ -14,6 +14,12 @@ public class Message {
     private String content;
     private Calendar time;
 
+    public Message(boolean sent, String content) {
+        this.sent = sent;
+        this.content = content;
+        this.time = Calendar.getInstance();
+    }
+
     public int getId() {
         return id;
     }
