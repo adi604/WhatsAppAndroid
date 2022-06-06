@@ -8,13 +8,13 @@ import java.util.List;
 
 public class ContactViewModel {
 
-//    //private ContactRepository mRepository;
+//    private ContactRepository mRepository;
 //
 //    private LiveData<List<Contact>> contacts;
 //
 //    public ContactViewModel () {
-//        //mRepository = new ContactRepository();
-//        //contacts = mRepository.getAll();
+//        mRepository = new ContactRepository();
+//        contacts = mRepository.getAll();
 //    }
 //
 //    public LiveData<List<Contact>> get() { return contacts;}

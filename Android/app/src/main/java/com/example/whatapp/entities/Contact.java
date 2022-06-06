@@ -20,6 +20,7 @@ public class Contact {
     private int id;
 
     private String userName;
+    private String server;
     private String lastMessageC;
     private int image;
     private Calendar lastMessageT;
@@ -45,6 +46,13 @@ public class Contact {
         this.lastMessageC = lastMessageC;
     }
 
+    public String getServer() {
+        return server;
+    }
+
+    public void setServer(String server) {
+        this.server = server;
+    }
 
     public int getId() {
         return id;
@@ -78,6 +86,5 @@ public class Contact {
         image = img;
         lastMessageT = Calendar.getInstance();
         lastMessageC = message;
-
     }
 }
