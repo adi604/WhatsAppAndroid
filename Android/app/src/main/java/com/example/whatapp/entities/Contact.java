@@ -2,6 +2,7 @@ package com.example.whatapp.entities;
 
 import android.os.Build;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -11,29 +12,30 @@ import java.util.Formatter;
 
 import com.example.whatapp.R;
 
-@Entity
+@Entity(primaryKeys = {"id", "userId"})
 public class Contact {
 
-    @PrimaryKey
+    @NonNull
     private String id;
+    @NonNull
     private String userId;
     private String name;
     private String server;
     private String last;
     private int image;
-    private Calendar lastDate;
+    private String lastDate;
 
-    public Contact(String id, String name, String server, String last, int image, Calendar lastDate) {
-        this.userId = null;
-        this.id = id;
-        this.name = name;
-        this.server = server;
-        this.last = last;
-        this.image = image;
-        this.lastDate = lastDate;
-    }
+//    public Contact(@NonNull String id, String name, String server, String last, int image, Calendar lastDate) {
+//        this.userId = null;
+//        this.id = id;
+//        this.name = name;
+//        this.server = server;
+//        this.last = last;
+//        this.image = image;
+//        this.lastDate = lastDate;
+//    }
 
-    public Contact(String id, String userId, String name, String server, String last, int image, Calendar lastDate) {
+    public Contact(@NonNull String id,@NonNull String userId, String name, String server, String last, int image, String lastDate) {
         this.id = id;
         this.userId = userId;
         this.name = name;
@@ -47,7 +49,6 @@ public class Contact {
     public Contact(String user,String message,  int img) {
         name = user;
         image = img;
-        lastDate = Calendar.getInstance();
         last = message;
     }
 
@@ -55,17 +56,18 @@ public class Contact {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(@NonNull String userId) {
         this.userId = userId;
     }
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
     public void setName(String name) {
         this.name = name;
     }
+
 
     public void setImage(int image) {
         this.image = image;
@@ -87,7 +89,7 @@ public class Contact {
         this.server = server;
     }
 
-    public String getId() {
+    public @NonNull  String getId() {
         return id;
     }
 
@@ -103,13 +105,17 @@ public class Contact {
         image = R.drawable.background;
     }
 
-    public void setLastDate(Calendar lastMessage) {
-        this.lastDate = lastMessage;
+    public void setLastDate(String lastDate) {
+        this.lastDate = lastDate;
     }
 
     public String getLastDate() {
+        return lastDate;
+    }
+
+    public String getLastDateFormatted() {
         Formatter fmt = new Formatter();
-        fmt.format("%tl:%tM", lastDate, lastDate);
+        fmt.format("%tl:%tM", Calendar.getInstance(), Calendar.getInstance());
         return fmt.toString();
     }
 

@@ -54,15 +54,8 @@ public class ContactsActivity extends AppCompatActivity {
         viewModel = new ContactsViewModel(getIntent().getStringExtra("token"), currentUser.getId());
         viewModel.getAllContacts().observe(this, contacts -> {
             adapter.setContacts(contacts);
+            adapter.notifyDataSetChanged();
         });
-
-
-        contacts = new ArrayList<>();
-        contacts.add(new Contact("Adi Aviv", "hey adi", R.drawable.background));
-        contacts.add(new Contact("guy Ben Razon", "hey guy", R.drawable.background));
-        contacts.add(new Contact("Eran Haim", "hey eran", R.drawable.background));
-        contacts.add(new Contact("Or Aviv", "hey or", R.drawable.background));
-        adapter.setContacts(contacts);
 
         EditText search = findViewById(R.id.search);
         search.addTextChangedListener(new TextWatcher() {

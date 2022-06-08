@@ -19,7 +19,7 @@ public class ContactsViewModel {
 
     public LiveData<List<Contact>> getAllContacts() { return contacts;}
 
-    public void add(Contact contact) {mRepository.add(contact);}
+    //public void add(Contact contact) {mRepository.add(contact);}
 
     //public void reload() {mRepository.reload();}
 }
