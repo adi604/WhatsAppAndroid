@@ -10,16 +10,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.whatapp.adapters.ContactsListAdapter;
 import com.example.whatapp.entities.Contact;
+import com.example.whatapp.entities.User;
+import com.example.whatapp.viewModels.ContactsViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +27,11 @@ import java.util.Locale;
 
 public class ContactsActivity extends AppCompatActivity {
 
-    List<Contact> list;
-    ContactsListAdapter adapter;
-    FloatingActionButton btnAdd;
+    private User currentUser;
+    private List<Contact> contacts;
+    private ContactsViewModel viewModel;
+    private ContactsListAdapter adapter;
+    private FloatingActionButton btnAdd;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -38,17 +40,29 @@ public class ContactsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contacts);
         getSupportActionBar().hide();
 
+        // gets the current user that logged in
+        String userJson = getIntent().getStringExtra("current-user");
+        currentUser = new Gson().fromJson(userJson, User.class);
+
+        // create recyclerview and adapter for contact
         RecyclerView lstContacts = findViewById(R.id.lstContacts);
         adapter = new ContactsListAdapter(this);
         lstContacts.setAdapter(adapter);
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
 
-        list = new ArrayList<>();
-        list.add(new Contact("Adi Aviv", "hey adi",R.drawable.background));
-        list.add(new Contact("guy Ben Razon","hey guy", R.drawable.background));
-        list.add(new Contact("Eran Haim","hey eran",  R.drawable.background));
-        list.add(new Contact("Or Aviv","hey or" , R.drawable.background));
-        adapter.setContacts(list);
+        // creates the contact viewModel and pass the JWT token to the viewmodel
+        viewModel = new ContactsViewModel(getIntent().getStringExtra("token"), currentUser.getId());
+        viewModel.getAllContacts().observe(this, contacts -> {
+            adapter.setContacts(contacts);
+        });
+
+
+        contacts = new ArrayList<>();
+        contacts.add(new Contact("Adi Aviv", "hey adi", R.drawable.background));
+        contacts.add(new Contact("guy Ben Razon", "hey guy", R.drawable.background));
+        contacts.add(new Contact("Eran Haim", "hey eran", R.drawable.background));
+        contacts.add(new Contact("Or Aviv", "hey or", R.drawable.background));
+        adapter.setContacts(contacts);
 
         EditText search = findViewById(R.id.search);
         search.addTextChangedListener(new TextWatcher() {
@@ -56,10 +70,12 @@ public class ContactsActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 filter(s.toString());
@@ -68,38 +84,31 @@ public class ContactsActivity extends AppCompatActivity {
 
         btnAdd = findViewById(R.id.btnAdd);
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog dialog = new Dialog(ContactsActivity.this);
-                dialog.setContentView(R.layout.activity_add_contact);
-                EditText edtName = dialog.findViewById(R.id.name);
-                EditText edtServer = dialog.findViewById(R.id.server);
-                Button btnUpdate = dialog.findViewById(R.id.btnUpdate);
+        btnAdd.setOnClickListener(v -> {
+            Dialog dialog = new Dialog(ContactsActivity.this);
+            dialog.setContentView(R.layout.activity_add_contact);
+            EditText edtName = dialog.findViewById(R.id.name);
+            EditText edtServer = dialog.findViewById(R.id.server);
+            Button btnUpdate = dialog.findViewById(R.id.btnUpdate);
 
-                btnUpdate.setOnClickListener(new View.OnClickListener() {
+            btnUpdate.setOnClickListener(v2 -> {
+                String name = edtName.getText().toString();
+                String server = edtServer.getText().toString();
 
-                    @Override
-                    public void onClick(View v) {
-                        String name = edtName.getText().toString();
-                        String server = edtServer.getText().toString();
+                if (name.equals("")) {
+                    Toast.makeText(ContactsActivity.this, "Please Enter Contact Name!", Toast.LENGTH_SHORT).show();
+                }
 
-                        if (name.equals("")) {
-                            Toast.makeText(ContactsActivity.this, "Please Enter Contact Name!" , Toast.LENGTH_SHORT).show();
-                        }
+                if (server.equals("")) {
+                    Toast.makeText(ContactsActivity.this, "Please Enter Server!", Toast.LENGTH_SHORT).show();
+                }
 
-                        if (server.equals("")) {
-                            Toast.makeText(ContactsActivity.this, "Please Enter Server!" , Toast.LENGTH_SHORT).show();
-                        }
+                contacts.add(new Contact(name, "", R.drawable.background));
+                adapter.setContacts(contacts);
 
-                        list.add(new Contact(name, "", R.drawable.background));
-                        adapter.setContacts(list);
-
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
-            }
+                dialog.dismiss();
+            });
+            dialog.show();
         });
 
     }
@@ -107,8 +116,8 @@ public class ContactsActivity extends AppCompatActivity {
     private void filter(String text) {
         ArrayList<Contact> filteredList = new ArrayList<>();
         text = text.toLowerCase(Locale.ROOT);
-        for (Contact contact : list) {
-            if (contact.getUserName().toLowerCase(Locale.ROOT).contains(text)) {
+        for (Contact contact : contacts) {
+            if (contact.getName().toLowerCase(Locale.ROOT).contains(text)) {
                 filteredList.add(contact);
             }
         }

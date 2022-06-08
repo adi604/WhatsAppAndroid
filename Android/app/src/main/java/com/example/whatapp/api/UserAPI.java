@@ -1,5 +1,7 @@
 package com.example.whatapp.api;
 
+import com.example.whatapp.App;
+import com.example.whatapp.R;
 import com.example.whatapp.entities.Lambda;
 import com.example.whatapp.entities.LoginInfo;
 import com.example.whatapp.entities.User;
@@ -14,15 +16,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class UserAPI {
-    Retrofit retrofit;
-    WebServiceAPI webServiceAPI;
+    private Retrofit retrofit;
+    private WebServiceAPI webServiceAPI;
 
     public UserAPI() {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:5028/api/")//String.valueOf((R.string.BaseUrl)))
+                .baseUrl(App.getContext().getString(R.string.BaseUrl))
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();

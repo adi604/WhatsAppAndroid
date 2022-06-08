@@ -53,16 +53,16 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
     public void onBindViewHolder(ContactViewHolder holder, int position) {
         if (contacts != null) {
             final Contact current = contacts.get(position);
-            holder.tvUserName.setText(current.getUserName());
+            holder.tvUserName.setText(current.getName());
             holder.ivImage.setImageResource(current.getImage());
-            holder.tvLMessageT.setText(current.getLastMessageT());
-            holder.tvLMessageC.setText(current.getLastMessageC());
+            holder.tvLMessageT.setText(current.getLastDate());
+            holder.tvLMessageC.setText(current.getLast());
 
             holder.cl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, ChatActivity.class);
-                    intent.putExtra("name_contact" , current.getUserName());
+                    intent.putExtra("name_contact" , current.getName());
                     mContext.startActivity(intent);
                 }
             });
