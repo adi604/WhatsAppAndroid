@@ -44,7 +44,7 @@ public class ContactsRepository {
             new Thread(() -> {
                 contactListData.postValue(dao.getAllContacts(userId));
             }).start();
-            api.getAllContacts(token, this);
+            api.getAllContacts(userId, token, this);
         }
     }
 

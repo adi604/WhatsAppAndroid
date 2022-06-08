@@ -2,6 +2,8 @@ package com.example.whatapp;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,7 +56,6 @@ public class ContactsActivity extends AppCompatActivity {
         viewModel = new ContactsViewModel(getIntent().getStringExtra("token"), currentUser.getId());
         viewModel.getAllContacts().observe(this, contacts -> {
             adapter.setContacts(contacts);
-            adapter.notifyDataSetChanged();
         });
 
         EditText search = findViewById(R.id.search);
