@@ -15,4 +15,9 @@
     <string name="chat_enter_message">Enter Message</string>
     <string name="chat_send">Send</string>
     <string name="BaseUrl">http://10.0.2.2:5028/api/</string>
+    <string name="login_error_Msg">Invalid username or password</string>
+    <string name="register_empty_field_msg">All field required</string>
+    <string name="register_password_confirmation_msg">The password confirmation does not match.</string>
+    <string name="register_password_length_msg">Password needs to be at least 10 characters</string>
+    <string name="register_username_taken_msg">Username already taken</string>
 </resources>

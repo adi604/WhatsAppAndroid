@@ -24,7 +24,7 @@
         tools:ignore="MissingConstraints">
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/etRegisterUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -33,17 +33,17 @@
             android:padding="15dp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonNickName"
+            android:id="@+id/etRegisterNickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/register_nickname"
-            android:inputType="textPassword"
+            android:inputType="textPersonName"
             android:padding="15dp"
             tools:ignore="DuplicateIds" />
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/etRegisterPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -52,7 +52,7 @@
             android:padding="15dp" />
 
         <EditText
-            android:id="@+id/editTextTextConfirmPassword"
+            android:id="@+id/etRegisterConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

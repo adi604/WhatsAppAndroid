@@ -57,6 +57,20 @@ public class UserAPI {
             public void onFailure(Call<User> call, Throwable t) {
             }
         });
+    }
 
+    public void register(User newUser, Lambda onResponse) {
+        Call<String> call;
+        call = webServiceAPI.createUser(newUser);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                onResponse.onLoginResponse(response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+            }
+        });
     }
 }

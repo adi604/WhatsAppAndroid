@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                         });
                         return;
                     }
-                    Toast.makeText(MainActivity.this, "Invalid username or password" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, R.string.login_error_Msg, Toast.LENGTH_SHORT).show();
                 }
             });
         });
