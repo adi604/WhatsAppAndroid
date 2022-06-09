@@ -54,11 +54,15 @@ public class ContactsRepository {
         }
     }
 
+    public ContactListData getContactListData() {
+        return contactListData;
+    }
+
     public LiveData<List<Contact>> getAllContacts() {
         return contactListData;
     }
 
     public void add(String from, String to, String server) {
-        api.add(from,to,server);
+        api.add(from,to,server, this);
     }
 }

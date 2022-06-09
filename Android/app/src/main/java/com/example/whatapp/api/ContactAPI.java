@@ -12,6 +12,7 @@ import com.example.whatapp.entities.Invitation;
 import com.example.whatapp.entities.Lambda;
 import com.example.whatapp.entities.LoginInfo;
 import com.example.whatapp.entities.NewContact;
+import com.example.whatapp.repositories.ContactsRepository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -72,9 +73,24 @@ public class ContactAPI {
         });
     }
 
-    public void add(String from, String to, String server) {
+    public void add(String from, String to, String server, ContactsRepository repository) {
         Call<String> call;
         Invitation invitation = new Invitation(from,to,server);
         call = webServiceAPI.invite(invitation);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.code() == 201) {
+                    Thread t = new Thread(() -> {
+                       contactDao.insert(new Contact());
+                       repository.getContactListData()
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+            }
+        });
     }
 }
