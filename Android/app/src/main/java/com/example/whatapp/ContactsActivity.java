@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,7 +16,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.whatapp.adapters.ContactsListAdapter;
+import com.example.whatapp.api.UserAPI;
 import com.example.whatapp.entities.Contact;
+import com.example.whatapp.entities.Lambda;
 import com.example.whatapp.entities.User;
 import com.example.whatapp.viewModels.ContactsViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,6 +35,7 @@ public class ContactsActivity extends AppCompatActivity {
     private ContactsViewModel viewModel;
     private ContactsListAdapter adapter;
     private FloatingActionButton btnAdd;
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -93,6 +97,8 @@ public class ContactsActivity extends AppCompatActivity {
                 if (!isValid(username, nickname, server)) {
                     return;
                 }
+                viewModel.add(currentUser.getId(), username, server);
+                contacts.add(new Contact(username, currentUser.getId(), nickname, server, "", 0, ""));
                 adapter.setContacts(contacts);
 
                 dialog.dismiss();

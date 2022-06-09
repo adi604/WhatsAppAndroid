@@ -40,9 +40,16 @@ public class ContactsRepository {
         @Override
         protected void onActive() {
             super.onActive();
-            new Thread(() -> {
+            Thread t = new Thread(() -> {
                 contactListData.postValue(dao.getAllContacts(userId));
-            }).start();
+            });
+            t.start();
+            try {
+                t.join();
+            }
+            catch(InterruptedException e) {
+                e.printStackTrace();
+            }
             api.getAllContacts(userId, token, this);
         }
     }
@@ -51,5 +58,7 @@ public class ContactsRepository {
         return contactListData;
     }
 
-    //public void addContact()
+    public void add(String from, String to, String server) {
+        api.add(from,to,server);
+    }
 }

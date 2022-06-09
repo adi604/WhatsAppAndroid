@@ -1,7 +1,9 @@
 package com.example.whatapp.api;
 
 import com.example.whatapp.entities.Contact;
+import com.example.whatapp.entities.Invitation;
 import com.example.whatapp.entities.LoginInfo;
+import com.example.whatapp.entities.NewContact;
 import com.example.whatapp.entities.User;
 
 import java.util.List;
@@ -24,4 +26,10 @@ interface WebServiceAPI {
 
     @GET("contacts")
     Call<List<Contact>> getAllContacts(@Header("Authorization") String token);
+
+    @POST("contacts")
+    Call<String> createContact(@Body NewContact newContact);
+
+    @POST("invitations")
+    Call<String> invite(@Body Invitation invitation);
 }

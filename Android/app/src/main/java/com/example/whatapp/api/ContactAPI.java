@@ -8,8 +8,10 @@ import com.example.whatapp.R;
 import com.example.whatapp.database.ContactDao;
 import com.example.whatapp.database.LocalDatabase;
 import com.example.whatapp.entities.Contact;
+import com.example.whatapp.entities.Invitation;
 import com.example.whatapp.entities.Lambda;
 import com.example.whatapp.entities.LoginInfo;
+import com.example.whatapp.entities.NewContact;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -53,7 +55,7 @@ public class ContactAPI {
             @Override
             public void onResponse(Call<List<Contact>> call, Response<List<Contact>> response) {
                 if (response.code() == 200) {
-                    // insert all of the contacts to the localDB in seperate thread
+                    // insert all of the contacts to the localDB in separate thread
                     new Thread(() -> {
                         for (Contact contact : response.body()) {
                             contact.setUserId(userId);
@@ -68,5 +70,11 @@ public class ContactAPI {
             public void onFailure(Call<List<Contact>> call, Throwable t) {
             }
         });
+    }
+
+    public void add(String from, String to, String server) {
+        Call<String> call;
+        Invitation invitation = new Invitation(from,to,server);
+        call = webServiceAPI.invite(invitation);
     }
 }
