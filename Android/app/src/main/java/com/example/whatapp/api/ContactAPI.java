@@ -73,17 +73,27 @@ public class ContactAPI {
         });
     }
 
-    public void add(String from, String to, String server, ContactsRepository repository) {
+    public void add(String from, String to,String nickname, String server, ContactsRepository repository) {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        String serverNumber = server.split(":")[1];
+        Retrofit clientRetrofit = new Retrofit.Builder()
+                .baseUrl(App.getContext().getString(Integer.parseInt(serverNumber)))
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        WebServiceAPI clientWebServiceAPI = clientRetrofit.create(WebServiceAPI.class);
         Call<String> call;
-        Invitation invitation = new Invitation(from,to,server);
-        call = webServiceAPI.invite(invitation);
+        Invitation invitation = new Invitation(from,to,"localhost:5028");
+        call = clientWebServiceAPI.invite(invitation);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.code() == 201) {
                     Thread t = new Thread(() -> {
-                       contactDao.insert(new Contact());
-                       repository.getContactListData()
+                        webServiceAPI.createContact(new NewContact(to,nickname,server));
+                        contactDao.insert(new Contact(to, from,  to, server, "", 0, ""));
                     });
                 }
             }

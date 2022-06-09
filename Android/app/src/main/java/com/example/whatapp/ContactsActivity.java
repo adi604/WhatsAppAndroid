@@ -97,7 +97,7 @@ public class ContactsActivity extends AppCompatActivity {
                 if (!isValid(username, nickname, server)) {
                     return;
                 }
-                viewModel.add(currentUser.getId(), username, server);
+                viewModel.add(currentUser.getId(), username, nickname, server);
                 adapter.setContacts(contacts);
 
                 dialog.dismiss();
