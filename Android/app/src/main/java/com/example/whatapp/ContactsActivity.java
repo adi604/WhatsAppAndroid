@@ -2,8 +2,6 @@ package com.example.whatapp;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,8 +54,10 @@ public class ContactsActivity extends AppCompatActivity {
         viewModel = new ContactsViewModel(getIntent().getStringExtra("token"), currentUser.getId());
         viewModel.getAllContacts().observe(this, contacts -> {
             adapter.setContacts(contacts);
+            this.contacts = contacts;
         });
 
+        // on search filter the list contact based on the search text
         EditText search = findViewById(R.id.search);
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -76,28 +76,23 @@ public class ContactsActivity extends AppCompatActivity {
             }
         });
 
+        // on adding a new contact
         btnAdd = findViewById(R.id.btnAdd);
-
         btnAdd.setOnClickListener(v -> {
             Dialog dialog = new Dialog(ContactsActivity.this);
             dialog.setContentView(R.layout.activity_add_contact);
-            EditText edtName = dialog.findViewById(R.id.name);
+            EditText edtUsername = dialog.findViewById(R.id.username);
+            EditText edtNickname = dialog.findViewById(R.id.nickname);
             EditText edtServer = dialog.findViewById(R.id.server);
             Button btnUpdate = dialog.findViewById(R.id.btnUpdate);
 
             btnUpdate.setOnClickListener(v2 -> {
-                String name = edtName.getText().toString();
+                String username = edtUsername.getText().toString();
+                String nickname = edtNickname.getText().toString();
                 String server = edtServer.getText().toString();
-
-                if (name.equals("")) {
-                    Toast.makeText(ContactsActivity.this, "Please Enter Contact Name!", Toast.LENGTH_SHORT).show();
+                if (!isValid(username, nickname, server)) {
+                    return;
                 }
-
-                if (server.equals("")) {
-                    Toast.makeText(ContactsActivity.this, "Please Enter Server!", Toast.LENGTH_SHORT).show();
-                }
-
-                contacts.add(new Contact(name, "", R.drawable.background));
                 adapter.setContacts(contacts);
 
                 dialog.dismiss();
@@ -105,6 +100,18 @@ public class ContactsActivity extends AppCompatActivity {
             dialog.show();
         });
 
+    }
+
+    //function validate that all fields entered and return true if they are
+    private boolean isValid(String username, String nickname, String server) {
+        if (username.equals("") || nickname.equals("") || server.equals("")) {
+            Toast.makeText(ContactsActivity.this, "All fields are required", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (this.currentUser.getId().equals(username) &&
+                    server.equals(App.getContext().getString(R.string.BaseUrl))){
+            return false;
+        }
+        return true;
     }
 
     private void filter(String text) {

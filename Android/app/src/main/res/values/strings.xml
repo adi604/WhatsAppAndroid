@@ -20,4 +20,7 @@
     <string name="register_password_confirmation_msg">The password confirmation does not match.</string>
     <string name="register_password_length_msg">Password needs to be at least 10 characters</string>
     <string name="register_username_taken_msg">Username already taken</string>
+    <string name="username">Username</string>
+    <string name="nickname">Nickname</string>
+    <string name="server">Server</string>
 </resources>

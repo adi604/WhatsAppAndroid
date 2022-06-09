@@ -9,8 +9,8 @@
 
     <LinearLayout
         android:id="@+id/addNewContact"
-        android:layout_width="250dp"
-        android:layout_height="260dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:orientation="vertical"
@@ -23,7 +23,7 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add Contact"
             android:textSize="30sp"
@@ -36,11 +36,20 @@
             tools:ignore="MissingConstraints" />
 
         <EditText
-            android:id="@+id/name"
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Name"
+            android:hint="@string/username"
+            android:inputType="textPersonName"
+            android:padding="15dp" />
+
+        <EditText
+            android:id="@+id/nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/nickname"
             android:inputType="textPersonName"
             android:padding="15dp" />
 
@@ -49,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Server"
+            android:hint="@string/server"
             android:inputType="text"
             android:padding="15dp" />
 

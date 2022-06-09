@@ -35,7 +35,6 @@ public class ContactsRepository {
 
         public ContactListData() {
             super();
-            super.setValue(new LinkedList<Contact>());
         }
 
         @Override
@@ -51,4 +50,6 @@ public class ContactsRepository {
     public LiveData<List<Contact>> getAllContacts() {
         return contactListData;
     }
+
+    //public void addContact()
 }

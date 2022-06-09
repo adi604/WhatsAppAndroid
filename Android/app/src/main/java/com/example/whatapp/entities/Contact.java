@@ -10,6 +10,7 @@ import androidx.room.PrimaryKey;
 import java.util.Calendar;
 import java.util.Formatter;
 
+import com.example.whatapp.App;
 import com.example.whatapp.R;
 
 @Entity(primaryKeys = {"id", "userId"})

@@ -53,10 +53,13 @@ public class ContactAPI {
             @Override
             public void onResponse(Call<List<Contact>> call, Response<List<Contact>> response) {
                 if (response.code() == 200) {
-//                    for (Contact contact : response.body()) {
-//                        contact.setUserId(userId);
-//                        contactDao.insert(contact);
-//                    }
+                    // insert all of the contacts to the localDB in seperate thread
+                    new Thread(() -> {
+                        for (Contact contact : response.body()) {
+                            contact.setUserId(userId);
+                            contactDao.insert(contact);
+                        }
+                    });
                     contacts.setValue(response.body());
                 }
             }
