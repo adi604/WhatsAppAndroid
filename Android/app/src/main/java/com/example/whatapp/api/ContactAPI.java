@@ -78,22 +78,33 @@ public class ContactAPI {
                 .setLenient()
                 .create();
         String serverNumber = server.split(":")[1];
-        Retrofit clientRetrofit = new Retrofit.Builder()
-                .baseUrl(App.getContext().getString(Integer.parseInt(serverNumber)))
+        String urlContact = (App.getContext().getString(R.string.BaseUrl)).replace("5028", serverNumber);
+        Retrofit contactRetrofit = new Retrofit.Builder()
+                .baseUrl(urlContact)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
-        WebServiceAPI clientWebServiceAPI = clientRetrofit.create(WebServiceAPI.class);
-        Call<String> call;
+        WebServiceAPI contactWebServiceAPI = contactRetrofit.create(WebServiceAPI.class);
+        Call<String> callContact;
         Invitation invitation = new Invitation(from,to,"localhost:5028");
-        call = clientWebServiceAPI.invite(invitation);
-        call.enqueue(new Callback<String>() {
+        callContact = contactWebServiceAPI.invite(invitation);
+        callContact.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.code() == 201) {
-                    Thread t = new Thread(() -> {
-                        webServiceAPI.createContact(new NewContact(to,nickname,server));
-                        contactDao.insert(new Contact(to, from,  to, server, "", 0, ""));
+                    Call<String> callUser;
+                    callUser = webServiceAPI.createContact(new NewContact(to,nickname,server));
+                    callUser.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call2, Response<String> response2) {
+                            if (response2.code() == 201) {
+                                contactDao.insert(new Contact(to, from,  to, server, "", 0, ""));
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                        }
                     });
                 }
             }

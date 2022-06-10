@@ -65,6 +65,5 @@ public class ContactsRepository {
     public void add(String from, String to,String nickname, String server) {
         api.add(from,to, nickname,server, this);
         contactListData.getValue().add(new Contact(to, from,  to, server, "", 0, ""));
-        contactListData.notifyAll();
     }
 }

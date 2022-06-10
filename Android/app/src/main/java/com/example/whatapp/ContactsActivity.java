@@ -99,7 +99,7 @@ public class ContactsActivity extends AppCompatActivity {
                 }
                 viewModel.add(currentUser.getId(), username, nickname, server);
                 adapter.setContacts(contacts);
-
+                adapter.notifyDataSetChanged();
                 dialog.dismiss();
             });
             dialog.show();
