@@ -93,11 +93,12 @@ public class ContactAPI {
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.code() == 201) {
                     Call<String> callUser;
-                    callUser = webServiceAPI.createContact(new NewContact(to,nickname,server));
+                    NewContact newContact = new NewContact(to,nickname,server);
+                    callUser = webServiceAPI.createContact(newContact);
                     callUser.enqueue(new Callback<String>() {
                         @Override
-                        public void onResponse(Call<String> call2, Response<String> response2) {
-                            if (response2.code() == 201) {
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            if (response.code() == 201) {
                                 contactDao.insert(new Contact(to, from,  to, server, "", 0, ""));
                             }
                         }

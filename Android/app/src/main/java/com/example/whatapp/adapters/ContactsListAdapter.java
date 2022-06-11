@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.whatapp.R;
 import com.example.whatapp.entities.Contact;
 import com.example.whatapp.ChatActivity;
+import com.example.whatapp.entities.User;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -40,8 +42,9 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
     private final LayoutInflater mInflater;
     private List<Contact> contacts;
     private Context mContext;
+    private User user;
 
-    public ContactsListAdapter(Context context) {mContext = context; mInflater = LayoutInflater.from(context);}
+    public ContactsListAdapter(Context context, User user) {mContext = context; mInflater = LayoutInflater.from(context); this.user = user;}
 
     @Override
     public ContactViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -63,6 +66,8 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, ChatActivity.class);
                     intent.putExtra("name_contact" , current.getName());
+                    intent.putExtra("userId" , user.getId());
+                    intent.putExtra("contactId" , current.getId());
                     mContext.startActivity(intent);
                 }
             });

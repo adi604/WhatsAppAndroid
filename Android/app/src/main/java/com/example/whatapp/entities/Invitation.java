@@ -5,10 +5,10 @@ public class Invitation {
     private String to;
     private String server;
 
-    public Invitation(String f, String t, String s) {
-        from = f;
-        to = t;
-        server = s;
+    public Invitation(String from, String to, String server) {
+        this.from = from;
+        this.to = to;
+        this.server = server;
     }
 
     public String getFrom() {

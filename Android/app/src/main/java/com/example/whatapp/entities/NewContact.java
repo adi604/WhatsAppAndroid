@@ -9,11 +9,11 @@ public class NewContact {
     private String name;
     private String server;
 
-    public NewContact(String i, String n, String s)
+    public NewContact(String id, String name, String server)
     {
-        id = i;
-        name = n;
-        server = s;
+        this.id = id;
+        this.name = name;
+        this.server = server;
     }
 
     @NonNull

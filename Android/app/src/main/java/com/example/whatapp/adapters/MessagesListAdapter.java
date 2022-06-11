@@ -61,7 +61,7 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
         }
     }
 
-    public void setContacts(List<Message> l) {
+    public void setMessages(List<Message> l) {
         messages = l;
         notifyDataSetChanged();
     }
@@ -74,7 +74,7 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
         return 0;
     }
 
-    public List<Message> getContacts() {
+    public List<Message> getMessages() {
         return messages;
     }
 }

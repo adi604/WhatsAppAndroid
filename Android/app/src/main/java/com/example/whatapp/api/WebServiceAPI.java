@@ -3,6 +3,7 @@ package com.example.whatapp.api;
 import com.example.whatapp.entities.Contact;
 import com.example.whatapp.entities.Invitation;
 import com.example.whatapp.entities.LoginInfo;
+import com.example.whatapp.entities.Message;
 import com.example.whatapp.entities.NewContact;
 import com.example.whatapp.entities.User;
 
@@ -32,4 +33,7 @@ interface WebServiceAPI {
 
     @POST("invitations")
     Call<String> invite(@Body Invitation invitation);
+
+    @GET("messages")
+    Call<List<Message>> getMessages(@Header("Authorization") String token, String id);
 }

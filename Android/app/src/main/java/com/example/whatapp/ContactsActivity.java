@@ -13,6 +13,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.whatapp.adapters.ContactsListAdapter;
@@ -47,10 +48,11 @@ public class ContactsActivity extends AppCompatActivity {
         // gets the current user that logged in
         String userJson = getIntent().getStringExtra("current-user");
         currentUser = new Gson().fromJson(userJson, User.class);
-
+        //set user name in heading
+        setName(currentUser.getName());
         // create recyclerview and adapter for contact
         RecyclerView lstContacts = findViewById(R.id.lstContacts);
-        adapter = new ContactsListAdapter(this);
+        adapter = new ContactsListAdapter(this, currentUser);
         lstContacts.setAdapter(adapter);
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
 
@@ -98,8 +100,8 @@ public class ContactsActivity extends AppCompatActivity {
                     return;
                 }
                 viewModel.add(currentUser.getId(), username, nickname, server);
-                adapter.setContacts(contacts);
-                adapter.notifyDataSetChanged();
+                //adapter.setContacts(contacts);
+                //adapter.notifyDataSetChanged();
                 dialog.dismiss();
             });
             dialog.show();
@@ -129,5 +131,14 @@ public class ContactsActivity extends AppCompatActivity {
         }
 
         adapter.setContacts(filteredList);
+    }
+
+    private void setName(String name_user) {
+        TextView user = findViewById(R.id.user);
+        user.setText(name_user);
+    }
+
+    public User getUser() {
+        return this.currentUser;
     }
 }

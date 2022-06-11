@@ -12,14 +12,22 @@ import com.example.whatapp.adapters.ContactsListAdapter;
 import com.example.whatapp.adapters.MessagesListAdapter;
 import com.example.whatapp.entities.Contact;
 import com.example.whatapp.entities.Message;
+import com.example.whatapp.entities.User;
+import com.example.whatapp.viewModels.ContactsViewModel;
+import com.example.whatapp.viewModels.MessagesViewModal;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
 
-    List<Message> list;
-    MessagesListAdapter adapter;
+    private String currentUser;
+    private String contactUser;
+    private List<Message> messages;
+    private MessagesViewModal viewModel;
+    private MessagesListAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,17 +37,28 @@ public class ChatActivity extends AppCompatActivity {
         String name_contact = getIntent().getStringExtra("name_contact");
         setName(name_contact);
 
+        // gets the current user that logged in
+        currentUser = getIntent().getStringExtra("userId");
+        contactUser = getIntent().getStringExtra("contactId");
+
         RecyclerView lstMessages = findViewById(R.id.lstMessages);
         adapter = new MessagesListAdapter(this);
         lstMessages.setAdapter(adapter);
         lstMessages.setLayoutManager(new LinearLayoutManager(this));
 
-        list = new ArrayList<>();
-        list.add(new Message(true, "hey adi"));
-        list.add(new Message(false, "hey eyal"));
-        list.add(new Message(false, "hey bar"));
-        list.add(new Message(true, "hey foo"));
-        adapter.setContacts(list);
+//        list = new ArrayList<>();
+//        list.add(new Message(true, "hey adi"));
+//        list.add(new Message(false, "hey eyal"));
+//        list.add(new Message(false, "hey bar"));
+//        list.add(new Message(true, "hey foo"));
+//        adapter.setMessages(list);
+
+        // creates the message viewModel and pass the JWT token to the viewmodel
+        viewModel = new MessagesViewModal(getIntent().getStringExtra("token"), currentUser, contactUser);
+        viewModel.getAllMessages().observe(this, messages -> {
+            adapter.setMessages(messages);
+            this.messages = messages;
+        });
 
     }
 
