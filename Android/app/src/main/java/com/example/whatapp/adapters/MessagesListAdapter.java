@@ -43,7 +43,7 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
     @Override
     public MessagesListAdapter.MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView;
-        if (viewType == 1) {
+        if (viewType == 0) {
             itemView = mInflater.inflate(R.layout.message_item_sent, parent, false);
         }
         else {
