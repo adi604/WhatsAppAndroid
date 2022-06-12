@@ -29,7 +29,7 @@ interface WebServiceAPI {
     Call<List<Contact>> getAllContacts(@Header("Authorization") String token);
 
     @POST("contacts")
-    Call<String> createContact(@Body NewContact newContact);
+    Call<String> createContact(@Header("Authorization") String token, @Body NewContact newContact);
 
     @POST("invitations")
     Call<String> invite(@Body Invitation invitation);

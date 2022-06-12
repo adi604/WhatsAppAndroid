@@ -22,8 +22,8 @@ public class ContactsViewModel extends ViewModel {
     public LiveData<List<Contact>> getAllContacts() { return contacts;}
 
 
-    public void add(String from, String to, String nickname, String server) {
-        mRepository.add(from,to, nickname,server);
+    public void add(String userId, String contactId, String contactName, String server) {
+        mRepository.add(userId,contactId, contactName,server);
     }
 
     //public void reload() {mRepository.reload();}

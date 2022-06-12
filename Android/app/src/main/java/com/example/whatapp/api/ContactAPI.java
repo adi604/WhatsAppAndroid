@@ -1,5 +1,6 @@
 package com.example.whatapp.api;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
@@ -16,6 +17,8 @@ import com.example.whatapp.repositories.ContactsRepository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.Calendar;
+import java.util.Formatter;
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,6 +29,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ContactAPI {
+    private static String serviceUrl = App.getContext().getString(R.string.BaseUrl)
+                                        .replace("localhost", "10.0.2.2");
+    private static Gson gson = new GsonBuilder()
+                                    .setLenient()
+                                    .create();
     private Retrofit retrofit;
     private WebServiceAPI webServiceAPI;
     private ContactDao contactDao;
@@ -34,20 +42,20 @@ public class ContactAPI {
         contactDao = Room.databaseBuilder(App.getContext(), LocalDatabase.class, "DB")
                     .allowMainThreadQueries()
                     .build().contactDao();
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
         retrofit = new Retrofit.Builder()
-                .baseUrl(App.getContext().getString(R.string.BaseUrl))
+                .baseUrl(serviceUrl)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);
     }
 
-    /*
-     function gets all of the contacts with the current token from the WebAPI
-     and sets the response in contacts
+    /**
+     * function gets the contacts list from the webservice
+     * and sets it's value on the mutable live data
+     * @param userId the user id
+     * @param token the JWT token
+     * @param contacts the contacts list
      */
     public void getAllContacts(String userId, String token, MutableLiveData<List<Contact>> contacts) {
         Call<List<Contact>> call;
@@ -73,40 +81,55 @@ public class ContactAPI {
         });
     }
 
-    public void add(String from, String to,String nickname, String server, ContactsRepository repository) {
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-        String serverNumber = server.split(":")[1];
-        String urlContact = (App.getContext().getString(R.string.BaseUrl)).replace("5028", serverNumber);
+    /**
+     * function adds a new contact to the DB through the service api
+     * @param userId the user id
+     * @param contactId the new contact id
+     * @param contactName the new contact name
+     * @param server the new contact server
+     * @param token the user id JWT token
+     * @param contacts the mutable contacts list
+     */
+    public void add(String userId, String contactId, String contactName, String server, String token, MutableLiveData<List<Contact>> contacts) {
+        String url = ("http://" + server + "/api/").replace("localhost", "10.0.2.2");
         Retrofit contactRetrofit = new Retrofit.Builder()
-                .baseUrl(urlContact)
+                .baseUrl(url)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         WebServiceAPI contactWebServiceAPI = contactRetrofit.create(WebServiceAPI.class);
         Call<String> callContact;
-        Invitation invitation = new Invitation(from,to,"localhost:5028");
+        Invitation invitation = new Invitation(userId,contactId,App.getContext().getString(R.string.web_api_url));
         callContact = contactWebServiceAPI.invite(invitation);
         callContact.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.code() == 201) {
-                    Call<String> callUser;
-                    NewContact newContact = new NewContact(to,nickname,server);
-                    callUser = webServiceAPI.createContact(newContact);
-                    callUser.enqueue(new Callback<String>() {
-                        @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
-                            if (response.code() == 201) {
-                                contactDao.insert(new Contact(to, from,  to, server, "", 0, ""));
-                            }
-                        }
+                    Contact c = new Contact(contactId, userId,  contactName, server, "", 0, "");
+                    addNewContact(c, token, contacts);
+                }
+            }
 
-                        @Override
-                        public void onFailure(Call<String> call, Throwable t) {
-                        }
-                    });
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+            }
+        });
+    }
+
+    private void addNewContact(Contact contact, String token, MutableLiveData<List<Contact>> contacts) {
+        Call<String> callUser;
+        NewContact newContact = new NewContact(contact.getId(),contact.getName(),contact.getServer());
+        callUser = webServiceAPI.createContact(token, newContact);
+        callUser.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.code() == 201) {
+                    String lastDate = new Formatter()
+                            .format("%tl:%tM", Calendar.getInstance(), Calendar.getInstance())
+                            .toString();
+                    contact.setLastDate(lastDate);
+                    contactDao.insert(contact);
+                    contacts.setValue(contactDao.getAllContacts(contact.getUserId()));
                 }
             }
 

@@ -16,6 +16,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class UserAPI {
+    private static String serviceUrl = App.getContext().getString(R.string.BaseUrl)
+            .replace("localhost", "10.0.2.2");
     private Retrofit retrofit;
     private WebServiceAPI webServiceAPI;
 
@@ -24,7 +26,7 @@ public class UserAPI {
                 .setLenient()
                 .create();
         retrofit = new Retrofit.Builder()
-                .baseUrl(App.getContext().getString(R.string.BaseUrl))
+                .baseUrl(serviceUrl)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();

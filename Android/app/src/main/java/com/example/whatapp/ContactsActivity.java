@@ -100,8 +100,6 @@ public class ContactsActivity extends AppCompatActivity {
                     return;
                 }
                 viewModel.add(currentUser.getId(), username, nickname, server);
-                //adapter.setContacts(contacts);
-                //adapter.notifyDataSetChanged();
                 dialog.dismiss();
             });
             dialog.show();
@@ -115,12 +113,14 @@ public class ContactsActivity extends AppCompatActivity {
             Toast.makeText(ContactsActivity.this, "All fields are required", Toast.LENGTH_SHORT).show();
             return false;
         } else if (this.currentUser.getId().equals(username) &&
-                    server.equals(App.getContext().getString(R.string.BaseUrl))){
+                    server.equals(App.getContext().getString(R.string.web_api_url))){
+            Toast.makeText(ContactsActivity.this, "Cant add yourself", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
     }
 
+    // function filter the contacts list based on the text that entered
     private void filter(String text) {
         ArrayList<Contact> filteredList = new ArrayList<>();
         text = text.toLowerCase(Locale.ROOT);

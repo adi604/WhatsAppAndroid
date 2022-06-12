@@ -14,7 +14,7 @@
     <string name="regitser_create_new_account">Create New Account</string>
     <string name="chat_enter_message">Enter Message</string>
     <string name="chat_send">Send</string>
-    <string name="BaseUrl">http://10.0.2.2:5028/api/</string>
+    <string name="BaseUrl">http://localhost:5028/api/</string>
     <string name="login_error_Msg">Invalid username or password</string>
     <string name="register_empty_field_msg">All field required</string>
     <string name="register_password_confirmation_msg">The password confirmation does not match.</string>
@@ -23,4 +23,5 @@
     <string name="username">Username</string>
     <string name="nickname">Nickname</string>
     <string name="server">Server</string>
+    <string name="web_api_url">localhost:5028</string>
 </resources>
