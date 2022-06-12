@@ -44,7 +44,6 @@ public class MessageAPI {
                 .fallbackToDestructiveMigration()
                 .allowMainThreadQueries()
                 .build();
-        //db.clearAllTables(); //****************************************8
         this.messageDao = db.messageDao();
         this.retrofit = new Retrofit.Builder()
                 .baseUrl(serviceUrl)
