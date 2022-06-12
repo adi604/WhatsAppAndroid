@@ -61,15 +61,12 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
             holder.tvLMessageT.setText(current.getLastDateFormatted());
             holder.tvLMessageC.setText(current.getLast());
 
-            holder.cl.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(mContext, ChatActivity.class);
-                    intent.putExtra("name_contact" , current.getName());
-                    intent.putExtra("userId" , user.getId());
-                    intent.putExtra("contactId" , current.getId());
-                    mContext.startActivity(intent);
-                }
+            holder.cl.setOnClickListener(v -> {
+                Intent intent = new Intent(mContext, ChatActivity.class);
+                intent.putExtra("name_contact" , current.getName());
+                intent.putExtra("userId" , user.getId());
+                intent.putExtra("contactId" , current.getId());
+                mContext.startActivity(intent);
             });
         }
 
