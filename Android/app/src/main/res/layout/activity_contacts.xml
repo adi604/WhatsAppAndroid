@@ -85,12 +85,27 @@
         app:maxImageSize="30dp"
         android:foregroundGravity="center"
         app:fabCustomSize="50dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginTop="10dp"
         app:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/headingUserName"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_menu_add"
+        tools:ignore="MissingConstraints,RtlSymmetry" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnSetting"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:maxImageSize="30dp"
+        android:foregroundGravity="center"
+        app:fabCustomSize="50dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="10dp"
+        app:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/headingUserName"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_menu_setting"
         tools:ignore="MissingConstraints,RtlSymmetry" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
