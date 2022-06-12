@@ -1,5 +1,7 @@
 package com.example.whatapp.api;
 
+import android.media.Image;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;

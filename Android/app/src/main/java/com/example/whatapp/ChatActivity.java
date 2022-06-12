@@ -61,6 +61,7 @@ public class ChatActivity extends AppCompatActivity {
         viewModel.getAllMessages().observe(this, messages -> {
             adapter.setMessages(messages);
             this.messages = messages;
+            lstMessages.scrollToPosition(messages.size() - 1);
         });
 
         // function to be called when the user wants to send a message

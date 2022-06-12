@@ -5,8 +5,12 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Formatter;
+import java.util.List;
+
 @Entity
 public class Message {
 
@@ -86,9 +90,12 @@ public class Message {
     }
 
     public String getCreated() {
-        Formatter fmt = new Formatter();
-        fmt.format("%tl:%tM", Calendar.getInstance(), Calendar.getInstance());
-        return fmt.toString();
+        if (!created.contains("T")) {
+            return created;
+        }
+        String time[] = created.split("T")[1].split(":");
+        String result = time[0] + ":" + time[1];
+        return result;
     }
 
     public void setSent(boolean sent) {

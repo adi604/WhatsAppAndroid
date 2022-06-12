@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/message_receive"
         android:backgroundTint="#D2D4D6"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:padding="8dp"
         android:paddingStart="10dp"
         app:layout_constraintRight_toRightOf="@+id/receive"
@@ -25,19 +25,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="15dp"
             android:text="message content"
             android:textColor="@color/black"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="20:20"
-            android:layout_marginRight="15dp"
-            android:textSize="17sp"
+            android:layout_marginLeft="10dp"
+            android:textSize="15sp"
             tools:ignore="RtlHardcoded,SmallSp" />
 
     </LinearLayout>

@@ -64,7 +64,7 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
             final Contact current = contacts.get(position);
             holder.tvUserName.setText(current.getName());
             holder.ivImage.setImageResource(current.getImage());
-            holder.tvLMessageT.setText(current.getLastDateFormatted());
+            holder.tvLMessageT.setText(current.getLastDate());
             holder.tvLMessageC.setText(current.getLast());
 
             holder.cl.setOnClickListener(v -> {

@@ -36,7 +36,7 @@ public class ContactsActivity extends AppCompatActivity {
     private ContactsViewModel viewModel;
     private ContactsListAdapter adapter;
     private FloatingActionButton btnAdd;
-
+    private FloatingActionButton btnSetting;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -104,6 +104,25 @@ public class ContactsActivity extends AppCompatActivity {
             });
             dialog.show();
         });
+
+        btnSetting = findViewById(R.id.btnSetting);
+        btnSetting.setOnClickListener(v -> {
+            Dialog dialog = new Dialog(ContactsActivity.this);
+            dialog.setContentView(R.layout.activity_setting);
+            EditText newServer = dialog.findViewById(R.id.newServer);
+            Button btnSave = dialog.findViewById(R.id.btnSave);
+
+            btnSave.setOnClickListener(v2 -> {
+                String server = newServer.getText().toString();
+                if (server.equals("")) {
+                    Toast.makeText(ContactsActivity.this, "Please enter new server", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                dialog.dismiss();
+            });
+            dialog.show();
+        });
+
 
     }
 

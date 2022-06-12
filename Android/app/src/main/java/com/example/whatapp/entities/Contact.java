@@ -103,7 +103,7 @@ public class Contact {
     }
 
     public Contact() {
-        image = R.drawable.background;
+        image = R.drawable.contact_image;
     }
 
     public void setLastDate(String lastDate) {
@@ -111,13 +111,12 @@ public class Contact {
     }
 
     public String getLastDate() {
-        return lastDate;
-    }
-
-    public String getLastDateFormatted() {
-        Formatter fmt = new Formatter();
-        fmt.format("%tl:%tM", Calendar.getInstance(), Calendar.getInstance());
-        return fmt.toString();
+        if (!lastDate.contains("T")) {
+            return lastDate;
+        }
+        String time[] = lastDate.split("T")[1].split(":");
+        String result = time[0] + ":" + time[1];
+        return result;
     }
 
 }
