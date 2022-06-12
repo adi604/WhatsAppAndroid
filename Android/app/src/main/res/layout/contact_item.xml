@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/idRLContact"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         android:background="@drawable/contact"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
@@ -35,6 +35,7 @@
 
             <TextView
                 android:id="@+id/tvUserName"
+                android:padding="5dp"
                 android:layout_width="268dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -46,6 +47,7 @@
 
             <TextView
                 android:id="@+id/tvLMessageC"
+                android:padding="5dp"
                 android:layout_width="268dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
