@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="Last message here"
-                android:textColor="@color/black"
+                android:textColor="#858585"
                 android:textSize="15sp" />
         </LinearLayout>
 
