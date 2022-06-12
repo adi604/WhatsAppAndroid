@@ -5,7 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.whatapp.R;
 import com.example.whatapp.adapters.ContactsListAdapter;
@@ -22,43 +26,54 @@ import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private String currentUser;
-    private String contactUser;
+    private User currentUser;
+    private Contact currentContact;
     private List<Message> messages;
     private MessagesViewModal viewModel;
     private MessagesListAdapter adapter;
-
+    private Button sendBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         getSupportActionBar().hide();
+        sendBtn = findViewById(R.id.button_send);
 
-        String name_contact = getIntent().getStringExtra("name_contact");
+        // gets the current user that logged in and the current contact
+        currentUser = new Gson().fromJson(getIntent().getStringExtra("current-user"), User.class);
+        currentContact = new Gson().fromJson(getIntent().getStringExtra("current-contact"), Contact.class);
+        String token = getIntent().getStringExtra("token");
+
+        this.viewModel = new MessagesViewModal(token, currentUser, currentContact);
+
+        //sets the name of the contact
+        String name_contact = currentContact.getName();
         setName(name_contact);
 
-        // gets the current user that logged in
-        currentUser = getIntent().getStringExtra("userId");
-        contactUser = getIntent().getStringExtra("contactId");
-
+        // sets the recyclerview and the messages adapter
         RecyclerView lstMessages = findViewById(R.id.lstMessages);
         adapter = new MessagesListAdapter(this);
         lstMessages.setAdapter(adapter);
         lstMessages.setLayoutManager(new LinearLayoutManager(this));
 
-        messages = new ArrayList<>();
-        messages.add(new Message(true, "hey adi"));
-        messages.add(new Message(false, "hey eyal"));
-        messages.add(new Message(false, "hey bar"));
-        messages.add(new Message(true, "hey foo"));
-        adapter.setMessages(messages);
+        // creates the message viewModel and pass the JWT token to the viewmodel
+        viewModel = new MessagesViewModal(token, currentUser, currentContact);
+        viewModel.getAllMessages().observe(this, messages -> {
+            adapter.setMessages(messages);
+            this.messages = messages;
+        });
 
-//        // creates the message viewModel and pass the JWT token to the viewmodel
-//        viewModel = new MessagesViewModal(getIntent().getStringExtra("token"), currentUser, contactUser);
-//        viewModel.getAllMessages().observe(this, messages -> {
-//            adapter.setMessages(messages);
-//            this.messages = messages;
-//        });
+        // function to be called when the user wants to send a message
+        sendBtn.setOnClickListener(v -> {
+            EditText etMessage = findViewById(R.id.edit_message);
+            String messageContent = etMessage.getText().toString();
+            // if the message is empty then return
+            if (messageContent.isEmpty()) {
+                return;
+            }
+            this.viewModel.sendMessage(messageContent);
+            etMessage.setText("");
+        });
 
     }
 

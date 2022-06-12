@@ -43,8 +43,14 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
     private List<Contact> contacts;
     private Context mContext;
     private User user;
+    private String token;
 
-    public ContactsListAdapter(Context context, User user) {mContext = context; mInflater = LayoutInflater.from(context); this.user = user;}
+    public ContactsListAdapter(Context context, User user, String token) {
+        mContext = context;
+        mInflater = LayoutInflater.from(context);
+        this.user = user;
+        this.token = token;
+    }
 
     @Override
     public ContactViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -63,9 +69,11 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
 
             holder.cl.setOnClickListener(v -> {
                 Intent intent = new Intent(mContext, ChatActivity.class);
-                intent.putExtra("name_contact" , current.getName());
-                intent.putExtra("userId" , user.getId());
-                intent.putExtra("contactId" , current.getId());
+                String contactJson = new Gson().toJson(current);
+                String userJson = new Gson().toJson(user);
+                intent.putExtra("token", this.token);
+                intent.putExtra("current-user", userJson);
+                intent.putExtra("current-contact", contactJson);
                 mContext.startActivity(intent);
             });
         }

@@ -52,7 +52,7 @@ public class ContactsActivity extends AppCompatActivity {
         setName(currentUser.getName());
         // create recyclerview and adapter for contact
         RecyclerView lstContacts = findViewById(R.id.lstContacts);
-        adapter = new ContactsListAdapter(this, currentUser);
+        adapter = new ContactsListAdapter(this, currentUser, getIntent().getStringExtra("token"));
         lstContacts.setAdapter(adapter);
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
 

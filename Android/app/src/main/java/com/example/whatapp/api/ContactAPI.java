@@ -31,15 +31,14 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class ContactAPI {
     private static String serviceUrl = App.getContext().getString(R.string.BaseUrl)
                                         .replace("localhost", "10.0.2.2");
-    private static Gson gson = new GsonBuilder()
-                                    .setLenient()
-                                    .create();
+    private static Gson gson = new GsonBuilder().setLenient().create();
     private Retrofit retrofit;
     private WebServiceAPI webServiceAPI;
     private ContactDao contactDao;
 
     public ContactAPI() {
         contactDao = Room.databaseBuilder(App.getContext(), LocalDatabase.class, "DB")
+                    .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build().contactDao();
         retrofit = new Retrofit.Builder()

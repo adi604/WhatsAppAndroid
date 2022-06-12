@@ -25,7 +25,8 @@ public class ContactsRepository {
         this.userId = userId;
         this.token = token;
         this.db = Room.databaseBuilder(App.getContext(), LocalDatabase.class, "DB")
-                  .allowMainThreadQueries().build();
+                .fallbackToDestructiveMigration()
+                .allowMainThreadQueries().build();
         this.dao = db.contactDao();
         this.contactListData = new ContactListData();
         this.api = new ContactAPI();
