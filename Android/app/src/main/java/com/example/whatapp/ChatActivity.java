@@ -46,19 +46,19 @@ public class ChatActivity extends AppCompatActivity {
         lstMessages.setAdapter(adapter);
         lstMessages.setLayoutManager(new LinearLayoutManager(this));
 
-//        list = new ArrayList<>();
-//        list.add(new Message(true, "hey adi"));
-//        list.add(new Message(false, "hey eyal"));
-//        list.add(new Message(false, "hey bar"));
-//        list.add(new Message(true, "hey foo"));
-//        adapter.setMessages(list);
+        messages = new ArrayList<>();
+        messages.add(new Message(true, "hey adi"));
+        messages.add(new Message(false, "hey eyal"));
+        messages.add(new Message(false, "hey bar"));
+        messages.add(new Message(true, "hey foo"));
+        adapter.setMessages(messages);
 
-        // creates the message viewModel and pass the JWT token to the viewmodel
-        viewModel = new MessagesViewModal(getIntent().getStringExtra("token"), currentUser, contactUser);
-        viewModel.getAllMessages().observe(this, messages -> {
-            adapter.setMessages(messages);
-            this.messages = messages;
-        });
+//        // creates the message viewModel and pass the JWT token to the viewmodel
+//        viewModel = new MessagesViewModal(getIntent().getStringExtra("token"), currentUser, contactUser);
+//        viewModel.getAllMessages().observe(this, messages -> {
+//            adapter.setMessages(messages);
+//            this.messages = messages;
+//        });
 
     }
 
