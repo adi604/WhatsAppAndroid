@@ -12,9 +12,10 @@
             android:id="@+id/idRLContact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/message"
-            android:backgroundTint="@android:color/darker_gray"
+            android:background="@drawable/message_send"
+            android:backgroundTint="@color/teal_200"
             android:orientation="horizontal"
+            android:paddingStart="20dp"
             android:padding="8dp"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="15dp">
@@ -27,7 +28,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="5dp"
                 android:text="message content"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="18sp" />
 
             <TextView

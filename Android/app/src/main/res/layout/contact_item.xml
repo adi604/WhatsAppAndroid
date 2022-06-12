@@ -9,9 +9,8 @@
 
     <LinearLayout
         android:id="@+id/idRLContact"
-        android:layout_width="410dp"
+        android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_margin="3dp"
         android:background="@drawable/contact"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
@@ -33,26 +32,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-        <TextView
-            android:id="@+id/tvUserName"
-            android:layout_width="268dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="8dp"
-            android:text="Contact Name"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/tvLMessageC"
-            android:layout_width="268dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Last message here"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="268dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="8dp"
+                android:text="Contact Name"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvLMessageC"
+                android:layout_width="268dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Last message here"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvLMessageT"

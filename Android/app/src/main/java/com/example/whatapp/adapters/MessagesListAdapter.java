@@ -47,7 +47,7 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
             itemView = mInflater.inflate(R.layout.message_item_sent, parent, false);
         }
         else {
-            itemView = mInflater.inflate(R.layout.message_item_recieve, parent, false);
+            itemView = mInflater.inflate(R.layout.message_item_receive, parent, false);
         }
         return new MessagesListAdapter.MessageViewHolder(itemView);
     }
