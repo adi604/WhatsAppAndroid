@@ -26,16 +26,6 @@ public class Contact {
     private int image;
     private String lastDate;
 
-//    public Contact(@NonNull String id, String name, String server, String last, int image, Calendar lastDate) {
-//        this.userId = null;
-//        this.id = id;
-//        this.name = name;
-//        this.server = server;
-//        this.last = last;
-//        this.image = image;
-//        this.lastDate = lastDate;
-//    }
-
     public Contact(@NonNull String id,@NonNull String userId, String name, String server, String last, int image, String lastDate) {
         this.id = id;
         this.userId = userId;
@@ -103,7 +93,7 @@ public class Contact {
     }
 
     public Contact() {
-        image = R.drawable.contact_image;
+        image = R.drawable.c;
     }
 
     public void setLastDate(String lastDate) {

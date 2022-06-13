@@ -7,10 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,6 +32,8 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ContactsActivity extends AppCompatActivity {
 
@@ -50,6 +56,11 @@ public class ContactsActivity extends AppCompatActivity {
         currentUser = new Gson().fromJson(userJson, User.class);
         //set user name in heading
         setName(currentUser.getName());
+        //set profile image for user
+        CircleImageView profileImage = findViewById(R.id.ivImage);
+        byte[] bytes = Base64.decode(currentUser.getImage(), Base64.DEFAULT);
+        profileImage.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0 , bytes.length));
+
         // create recyclerview and adapter for contact
         RecyclerView lstContacts = findViewById(R.id.lstContacts);
         adapter = new ContactsListAdapter(this, currentUser, getIntent().getStringExtra("token"));

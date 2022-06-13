@@ -36,7 +36,7 @@
             android:layout_height="40dp"
             android:padding="1dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/contact_image"
+            android:src="@drawable/c"
             tools:ignore="MissingConstraints" />
 
         <TextView

@@ -4,9 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.whatapp.api.UserAPI;
@@ -14,8 +20,13 @@ import com.example.whatapp.entities.Lambda;
 import com.example.whatapp.entities.User;
 import com.google.gson.Gson;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 public class RegisterActivity extends AppCompatActivity {
 
+    private String img = "";
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +65,57 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             });
         });
+
+        Button btnUploadImage = findViewById(R.id.btnUploadImage);
+        btnUploadImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                galleryIntent();
+            }
+        });
     }
+
+
+    public void galleryIntent(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 100);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+
+            // compare the resultCode with the
+            // SELECT_PICTURE constant
+            if (requestCode == 100) {
+                // Get the url of the image from data
+                Uri imgUri = data.getData();
+                try {
+                    InputStream inputStream = getContentResolver().openInputStream(imgUri);
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    img = encodeImage(bitmap);
+                }
+                catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private String encodeImage(Bitmap bitmap) {
+        int width = 150;
+        int height = bitmap.getHeight() * width / bitmap.getWidth();
+        Bitmap preBitmap = Bitmap.createScaledBitmap(bitmap, width, height, false);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        preBitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(bytes, Base64.DEFAULT);
+    }
+
+
     // function tests if the fields are valid and if they are then return a new user with those fields
     private User getAndValidateUser() {
         EditText etUsername = findViewById(R.id.etRegisterUsername);
@@ -66,7 +127,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText etConfPass = findViewById(R.id.etRegisterConfirmPassword);
         String confPassword = etConfPass.getText().toString();
 
-        if (username.isEmpty() || nickname.isEmpty() || password.isEmpty() || confPassword.isEmpty()) {
+        if (username.isEmpty() || nickname.isEmpty() || password.isEmpty() || confPassword.isEmpty() || img.isEmpty()) {
             Toast.makeText(RegisterActivity.this, R.string.register_empty_field_msg , Toast.LENGTH_SHORT).show();
             return null;
         } else if (!password.equals(confPassword)) {
@@ -76,6 +137,6 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(RegisterActivity.this, R.string.register_password_length_msg , Toast.LENGTH_SHORT).show();
             return null;
         }
-        return new User(username, nickname, password, "none");
+        return new User(username, nickname, password, img);
     }
 }
