@@ -23,23 +23,22 @@ public class Contact {
     private String name;
     private String server;
     private String last;
-    private int image;
+
     private String lastDate;
 
-    public Contact(@NonNull String id,@NonNull String userId, String name, String server, String last, int image, String lastDate) {
+    public Contact(@NonNull String id,@NonNull String userId, String name, String server, String last, String lastDate) {
         this.id = id;
         this.userId = userId;
         this.name = name;
         this.server = server;
         this.last = last;
-        this.image = image;
+
         this.lastDate = lastDate;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public Contact(String user,String message,  int img) {
+    public Contact(String user,String message) {
         name = user;
-        image = img;
         last = message;
     }
 
@@ -60,9 +59,6 @@ public class Contact {
     }
 
 
-    public void setImage(int image) {
-        this.image = image;
-    }
 
     public String getLast() {
         return last;
@@ -88,12 +84,9 @@ public class Contact {
         return name;
     }
 
-    public int getImage() {
-        return image;
-    }
 
     public Contact() {
-        image = R.drawable.c;
+
     }
 
     public void setLastDate(String lastDate) {

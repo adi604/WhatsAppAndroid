@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase;
 import com.example.whatapp.entities.Contact;
 import com.example.whatapp.entities.Message;
 
-@Database(entities = {Contact.class, Message.class}, version = 5)
+@Database(entities = {Contact.class, Message.class}, version = 6)
 public abstract class LocalDatabase extends RoomDatabase {
     public abstract ContactDao contactDao();
     public abstract MessageDao messageDao();

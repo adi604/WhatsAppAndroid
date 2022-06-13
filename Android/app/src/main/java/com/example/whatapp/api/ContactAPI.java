@@ -106,7 +106,7 @@ public class ContactAPI {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.code() == 201) {
-                    Contact c = new Contact(contactId, userId,  contactName, server, "", 0, "");
+                    Contact c = new Contact(contactId, userId,  contactName, server, "", "");
                     addNewContact(c, token, contacts);
                 }
             }
