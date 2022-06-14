@@ -48,5 +48,5 @@ public interface WebServiceAPI {
     Call<String> sendTransfer(@Body Transfer transfer);
 
     @POST("users/token")
-    Call<Void> setToken(@Header("Authorization") String token, TokenRequest tokenRequest);
+    Call<Void> setToken(@Header("Authorization") String token, @Body TokenRequest tokenRequest);
 }
