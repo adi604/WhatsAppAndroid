@@ -19,7 +19,7 @@ public class UserAPI {
     private static String serviceUrl = App.getContext().getString(R.string.BaseUrl)
             .replace("localhost", "10.0.2.2");
     private Retrofit retrofit;
-    private WebServiceAPI webServiceAPI;
+    public WebServiceAPI webServiceAPI;
 
     public UserAPI() {
         Gson gson = new GsonBuilder()

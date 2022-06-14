@@ -6,6 +6,7 @@ import com.example.whatapp.entities.LoginInfo;
 import com.example.whatapp.entities.Message;
 import com.example.whatapp.entities.NewContact;
 import com.example.whatapp.entities.NewUpdateMessage;
+import com.example.whatapp.entities.TokenRequest;
 import com.example.whatapp.entities.Transfer;
 import com.example.whatapp.entities.User;
 
@@ -18,7 +19,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
-interface WebServiceAPI {
+public interface WebServiceAPI {
     @GET("users")
     Call<User> getUser(@Header("Authorization") String token);
 
@@ -45,4 +46,7 @@ interface WebServiceAPI {
 
     @POST("transfer")
     Call<String> sendTransfer(@Body Transfer transfer);
+
+    @POST("users/token")
+    Call<Void> setToken(@Header("Authorization") String token, TokenRequest tokenRequest);
 }
