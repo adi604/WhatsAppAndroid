@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "whatappandroid-260ce",
+  "private_key_id": "f0f93eb97c5980751fa33c0be6a709dbcc2f0212",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDjQmYaiXg6rsyY\ntRTJsolj39exqrJ4vbQ3Kcon5CDAoSE/ioVXcyDhU3at+WY+PheNIVYhWT7txzL9\n7JJ3chGQq/BNpE4BYXEkE87DnwigXkrr+vyEeoC18HZJLnDWkHSi50jPAIe21pxG\nK1xrf/xq8uMsNkZYTq9U5djLIFavWBd32hDtKXc4AX/FYe/D3AmJzfymJanlzala\nc7F6qw5xN+THKrRw2mx8nl4cp2g8TwGjtHsv0zdnLNaYD1gd7rPeyTfrDHE92+SA\ncyRBK49J5DYcPjQkNMsHNekoMim3OmmvqZQjAxxRseJSWbAZ5GiAOpkPhpEqCC3b\nixHHBclVAgMBAAECggEAPmBHLhl1SoYX2gI5xnKeiy8xQK6ddc573Hg36GMRKk4P\nliUrHCmZaL9D39SIX6UjSbVQsq6QOytlr5RzTx2b/J10w5rJXk+kgkZ9hevsrjez\nULn+/U2ybj2l+cgpaHsVyHC65zY6CdE163yTTV4/pgssl0H+ZNaUATVlH7usj0uW\nFeJvkDbvzrs/hWEQ0FlByNsNL+Oxofa1fMvntBNuPV2DyZ91nvIMa3BfVn43o+lX\nKEKyKljX9oR9vpUTa/Iry0km+kZJnQLkSCqrHm5TFE4YoxIVQNAo6lT3nQ/wjwxa\ncu0CMEky8tfZ9FQOeqE2ZXmGPej93/QkofL+MfQusQKBgQD2Mi4/cf23VEoPWlNx\np0r5ZgQzdP9RsJov9hwUuQxcIeFfCy1fS5b/MHt37CZFCjy5bYKReixoFCdv75U8\nYqw4/dahSBkmrOqGtlU7tMieendpgkCboVdgfnA+flEZO9zrqpH5Of/84bycW60l\nta99auqo2tKWnsGAe9nGPPzBjwKBgQDsTyunxeFYiyberTJ/AJYK0MbpFgpCCijW\nMJNvcV2KDSKz23sYQayxlqRs1myOeO5ucZmn8bk4peZt2BWpLh2JxdZDeX1XKDC1\nIPH4lgsjUujFwPJgZaQuGXQQFA3XvYBPaDWliX9nrUkO6aqCGUueFHWgvnoWT5aJ\niXtwsu6M2wKBgQDYeU0S+k8lmNa54ylF4NxaqKn++Nva31bj3xnX2tIUXLIG2RQf\nG578aYvW6WzI/fRg8vqAohVTuozmrpnhC731KrVDANskl5xrsP0Gz7IrLvG6cw4O\nCfKDZQma2YTDlFBvY36Qzr/YgkBOl4mKg9N3isAkkqviRltMdxoIZe203wKBgQCu\nEwAQnecLR65BeIprHe5pVzQ/vZme3kcIyU3CWVtTd6upnDOIQdDKHTNQbYAYT6Ms\nPoi3O4x621LsdbI3Jx5hQBg/Kj6XtqZytysoOLdJtSh9jE2/jwAraVqjAXLVCuZ7\nGEP0hl4Q7IiV8LFHFwUqFN41pDrhNo2pEVqaQWUS4wKBgEAs9Nq0snC5SzA+KRCH\nY0FTmXUZdJPSsqy9Zdxou6hGZKe4uBLzvPwkqV3JbwF2xfT/7Ltn83qoWsLgQBxn\nfI9i9JwYSsEcwrxkTti2wPbhAJaZZsDR85dfPwr1apQJVLXRRNyaOR4gjwG0oVyM\nqVfTOR63XiovKFZ7glz/Edj2\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-tb2kz@whatappandroid-260ce.iam.gserviceaccount.com",
+  "client_id": "103401613629004660292",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-tb2kz%40whatappandroid-260ce.iam.gserviceaccount.com"
+}
