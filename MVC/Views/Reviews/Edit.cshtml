@@ -1,0 +1,32 @@
+﻿@model Review
+
+<link rel="stylesheet" href="~/css/‏‏StyleSheetCreate.css">
+
+
+<div>
+    <h1 class="heading">Add your review:</h1>
+    <form asp-action="Edit">
+        <input type="hidden" name="id" value="@Model.Id"/>
+        <div class="add">
+            <label class="details">
+                Name:
+            </label>
+            <input name="name" value="@Model.Name"/>
+        </div>
+        <div class="add">
+            <label class="details">
+                Description:
+            </label>
+            <input name="description" value="@Model.Description"/>
+        </div>
+        <div class="add">
+            <label class="details">
+                Grade:
+            </label>
+            <input name="grade" value="@Model.Grade"/>
+        </div>
+        <div class="add">
+            <input type="submit" />
+        </div>
+    </form>
+</div>

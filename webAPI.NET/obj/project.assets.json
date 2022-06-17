@@ -9911,11 +9911,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\adida\\OneDrive\\Documents\\GitHub\\WhatsAppWebASP\\webAPI.NET\\webAPI.NET.csproj",
+      "projectUniqueName": "C:\\Users\\adida\\OneDrive\\Documents\\GitHub\\WhatAppAndroid\\webAPI.NET\\webAPI.NET.csproj",
       "projectName": "webAPI.NET",
-      "projectPath": "C:\\Users\\adida\\OneDrive\\Documents\\GitHub\\WhatsAppWebASP\\webAPI.NET\\webAPI.NET.csproj",
+      "projectPath": "C:\\Users\\adida\\OneDrive\\Documents\\GitHub\\WhatAppAndroid\\webAPI.NET\\webAPI.NET.csproj",
       "packagesPath": "C:\\Users\\adida\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\adida\\OneDrive\\Documents\\GitHub\\WhatsAppWebASP\\webAPI.NET\\obj\\",
+      "outputPath": "C:\\Users\\adida\\OneDrive\\Documents\\GitHub\\WhatAppAndroid\\webAPI.NET\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\adida\\AppData\\Roaming\\NuGet\\NuGet.Config",

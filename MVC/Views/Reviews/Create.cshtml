@@ -1,0 +1,31 @@
+﻿
+<link rel="stylesheet" href="~/css/‏‏StyleSheetCreate.css">
+
+
+<div>
+
+    <h1 class="heading">Add your review:</h1>
+    <form asp-action="Create">
+        <div class="add">
+            <label class="details">
+                Name:
+            </label>
+            <input name="name" required/>
+        </div>
+        <div class="add">
+            <label class="details">
+                Description:
+            </label>
+            <input name="description" required/>
+        </div>
+        <div class="add">
+            <label class="details">
+                Grade:
+            </label>
+            <input type="number" name="grade" required min="1" max="5"/>
+        </div>
+        <div class="add">
+            <input type="submit" />
+        </div>
+    </form>
+</div>
