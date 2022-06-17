@@ -1,5 +1,8 @@
 package com.example.whatapp.api;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -16,6 +19,7 @@ import com.example.whatapp.entities.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Formatter;
 import java.util.List;
@@ -124,12 +128,12 @@ public class MessageAPI {
         WebServiceAPI contactWebServiceAPI = contactRetrofit.create(WebServiceAPI.class);
         call = contactWebServiceAPI.sendTransfer(new Transfer(user.getId(), contact.getId(), content));
         call.enqueue(new Callback<String>() {
-            @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.code() == 201) {
-                    Formatter fmt = new Formatter();
-                    fmt.format("%tl:%tM", Calendar.getInstance(), Calendar.getInstance());
-                    String time = fmt.toString();
+                    Calendar now = Calendar.getInstance();
+                    Formatter minute = new Formatter();
+                    minute.format("%tM", Calendar.getInstance());
+                    String time = ((now.get(Calendar.HOUR_OF_DAY) + 3) % 24) + ":" + minute.toString();
                     Message m = new Message(user.getId(), contact.getId(), true, content, time);
                     messageDao.insert(m);
                     messages.setValue(messageDao.getAllMessages(user.getId(), contact.getId()));
