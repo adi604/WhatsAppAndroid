@@ -11,3 +11,10 @@ plugins {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+task wrapper(type: Wrapper){
+    gradleVersion = '7.2'
+}
+
+task prepareKotlinBuildScriptModel {
+}
