@@ -49,3 +49,10 @@ dependencies {
     annotationProcessor 'androidx.room:room-compiler:2.4.2'
 }
 
+task wrapper(type: Wrapper){
+    gradleVersion = '7.2'
+}
+
+task prepareKotlinBuildScriptModel {
+}
+
